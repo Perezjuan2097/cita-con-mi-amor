@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#f472b6">
+<title>💌 Una invitación muy especial 💌</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>">
+<style>
+:root{--rosa:#ff5fa2;--rosa2:#ff9cc7;--rosaClaro:#ffe3f0;--morado:#9b5de5;--morado2:#c39bff;--moradoOsc:#5b2a86;--blanco:#fff}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%}
+body{font-family:Quicksand,system-ui,sans-serif;color:var(--moradoOsc);
+  background:linear-gradient(160deg,#ffd6ec 0%,#f3c4ff 45%,#d9b8ff 100%);background-attachment:fixed;overflow-x:hidden;min-height:100vh}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;
+  background-image:radial-gradient(circle at 20% 20%,rgba(255,255,255,.55) 0 2px,transparent 3px),radial-gradient(circle at 70% 60%,rgba(255,255,255,.5) 0 2px,transparent 3px);
+  background-size:60px 60px,90px 90px;opacity:.6}
+#hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.fh{position:absolute;bottom:-60px;animation:subir linear forwards;opacity:.85;filter:drop-shadow(0 2px 3px rgba(155,93,229,.3))}
+@keyframes subir{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+.screen{display:none;position:relative;z-index:1;min-height:100vh;padding:26px 18px 40px;max-width:520px;margin:0 auto;animation:entrar .6s ease}
+.screen.on{display:block}
+@keyframes entrar{from{opacity:0;transform:translateY(25px) scale(.97)}to{opacity:1;transform:none}}
+.card{background:rgba(255,255,255,.78);backdrop-filter:blur(8px);border:3px solid #fff;border-radius:28px;padding:22px 18px;
+  box-shadow:0 10px 30px rgba(155,93,229,.25),0 0 0 6px rgba(255,95,162,.15);position:relative;margin-bottom:18px}
+.card::before,.card::after{content:"💖";position:absolute;font-size:28px;animation:latir 1.2s infinite}
+.card::before{top:-16px;left:-10px}.card::after{content:"💜";bottom:-14px;right:-8px;animation-delay:.6s}
+@keyframes latir{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
+h1,h2{font-family:Pacifico,cursive;font-weight:400;text-align:center;margin:6px 0 12px;line-height:1.25}
+h1{font-size:34px;color:var(--rosa);text-shadow:2px 2px 0 #fff,4px 4px 0 rgba(155,93,229,.35)}
+h2{font-size:26px;color:var(--rosa)}
+p{font-size:17px;line-height:1.5;text-align:center;margin:8px 0}
+.small{font-size:14px;opacity:.85}
+.foto{display:block;width:170px;height:170px;object-fit:cover;margin:6px auto 12px;border-radius:50%;border:6px solid #fff;
+  box-shadow:0 0 0 5px var(--rosa2),0 10px 20px rgba(155,93,229,.35);background:var(--rosaClaro);animation:flotar 3s ease-in-out infinite}
+.foto.cuadro{border-radius:24px;transform:rotate(-3deg)}
+@keyframes flotar{0%,100%{translate:0 0}50%{translate:0 -8px}}
+.sticker{position:absolute;font-size:36px;animation:latir 1.6s infinite}
+.pie{display:block;text-align:center;font-size:13px;margin-top:-6px;margin-bottom:8px;opacity:.8;font-style:italic}
+.dias{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.dia{border:3px dashed var(--rosa2);background:#fff;border-radius:22px;padding:14px 8px;text-align:center;cursor:pointer;transition:.25s;font-weight:700}
+.dia b{display:block;font-family:Pacifico,cursive;font-weight:400;font-size:40px;color:var(--morado)}
+.dia span{font-size:14px}
+.dia.sel{background:linear-gradient(135deg,var(--rosa),var(--morado));color:#fff;border:3px solid #fff;transform:scale(1.05) rotate(-2deg);box-shadow:0 8px 18px rgba(255,95,162,.45)}
+.dia.sel b{color:#fff}
+.horas{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.hora{position:relative;background:#fff;border:2px solid var(--morado2);border-radius:18px;padding:10px 4px;text-align:center;cursor:pointer;font-weight:700;font-size:15px;transition:.2s}
+.hora i{display:block;font-style:normal;font-size:22px}
+.hora small{display:block;font-size:11px;font-weight:600;opacity:.75}
+.hora.sel{background:linear-gradient(135deg,#ff7eb6,#a66cff);color:#fff;border-color:#fff;transform:scale(1.08);box-shadow:0 6px 14px rgba(155,93,229,.45)}
+.hora.sel::after{content:"💘";position:absolute;top:-10px;right:-6px;font-size:20px}
+.oculto{display:none!important}
+.btn{display:block;width:100%;border:0;border-radius:999px;padding:16px;font:700 19px Quicksand,sans-serif;color:#fff;cursor:pointer;margin-top:16px;
+  background:linear-gradient(90deg,var(--rosa),var(--morado));box-shadow:0 8px 20px rgba(255,95,162,.45);transition:.2s}
+.btn:active{transform:scale(.96)}
+.btn:disabled{opacity:.45;filter:grayscale(.4)}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.act{background:#fff;border:2px solid var(--rosa2);border-radius:20px;padding:12px 8px;text-align:center;cursor:pointer;transition:.2s;font-weight:700;font-size:14.5px}
+.act i{display:block;font-size:32px;font-style:normal;margin-bottom:4px}
+.act small{display:block;font-weight:600;font-size:11.5px;opacity:.75;margin-top:3px}
+.act.sel{background:linear-gradient(135deg,#ffb3d6,#cfa6ff);border-color:#fff;transform:scale(1.04);box-shadow:0 6px 14px rgba(255,95,162,.35)}
+.act.sel::before{content:"✔️ ";}
+.act.estrella{grid-column:1/-1;border:3px solid var(--morado);background:linear-gradient(135deg,#fff,#efe1ff)}
+.act.estrella.sel{background:linear-gradient(135deg,#ff7eb6,#8f5bff);color:#fff}
+.pregunta{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.pregunta h1{font-size:46px}
+.botones{display:flex;gap:18px;justify-content:center;align-items:center;margin-top:20px;min-height:90px}
+.si{background:linear-gradient(135deg,#ff4f9a,#c03bff);color:#fff;border:4px solid #fff;border-radius:999px;font:700 24px Quicksand;padding:14px 38px;cursor:pointer;
+  box-shadow:0 8px 22px rgba(255,79,154,.5);transition:transform .25s;animation:latir 1.3s infinite}
+.no{background:#fff;color:var(--moradoOsc);border:3px solid var(--morado2);border-radius:999px;font:700 20px Quicksand;padding:12px 30px;cursor:pointer;transition:left .25s,top .25s;z-index:50;touch-action:manipulation}
+.no.huyendo{position:fixed}
+.burla{min-height:26px;font-weight:700;color:var(--rosa);margin-top:14px;font-size:16px}
+.comidas{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.comida{background:#fff;border:3px solid var(--rosa2);border-radius:24px;padding:16px 8px;text-align:center;cursor:pointer;font-weight:700;font-size:16px;transition:.2s}
+.comida i{display:block;font-size:48px;font-style:normal}
+.comida small{display:block;font-size:12px;font-weight:600;opacity:.75}
+.comida.sel{background:linear-gradient(135deg,var(--rosa),var(--morado));color:#fff;border-color:#fff;transform:scale(1.06) rotate(1.5deg)}
+.carga{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.corazonGrande{font-size:110px;animation:latido 0.9s infinite}
+@keyframes latido{0%,100%{transform:scale(1)}25%{transform:scale(1.2)}50%{transform:scale(1)}75%{transform:scale(1.15)}}
+.barra{width:85%;max-width:330px;height:22px;background:#fff;border-radius:999px;border:3px solid #fff;box-shadow:0 0 0 3px var(--rosa2);overflow:hidden;margin:20px auto}
+.barra div{height:100%;width:0;background:repeating-linear-gradient(45deg,var(--rosa) 0 12px,var(--morado) 12px 24px);transition:width .4s}
+.resumen{text-align:left;font-size:16px;line-height:1.7;background:#fff;border-radius:18px;padding:14px 16px;border:2px dashed var(--rosa2)}
+.resumen b{color:var(--morado)}
+.pasos{display:flex;justify-content:center;gap:6px;margin-bottom:10px}
+.pasos span{width:10px;height:10px;border-radius:50%;background:#fff;opacity:.7}
+.pasos span.on{background:var(--rosa);opacity:1;transform:scale(1.3)}
+.confeti{position:fixed;top:-30px;font-size:26px;animation:caer linear forwards;z-index:60;pointer-events:none}
+@keyframes caer{to{transform:translateY(110vh) rotate(540deg)}}
+</style>
+</head>
+<body>
+<div id="hearts"></div>
+
+<!-- ============ 1. INVITACIÓN + FECHA + HORA ============ -->
+<section class="screen on" id="s1">
+  <div class="pasos"><span class="on"></span><span></span><span></span><span></span><span></span></div>
+  <div class="card">
+    <h1>Hola mi amor 💌</h1>
+    <img class="foto gato" alt="gatito tierno">
+    <span class="pie">Este gatito fue contratado como mensajero oficial 🐱📨</span>
+    <p>Por medio de la presente, el <b>Ministerio del Amor a Distancia</b> 💘 te informa que has sido <b>seleccionada</b> (entre 8 mil millones de personas, sin trampa) para una cita romántica conmigo 🥺👉👈</p>
+    <p class="small">Requisitos: buen wifi, cara bonita (ya la tienes ✅) y muchas ganas de reírte de mí.</p>
+  </div>
+  <div class="card">
+    <h2>¿Qué día me regalas? 📅</h2>
+    <div class="dias">
+      <div class="dia" data-dia="Miércoles 18 de noviembre"><b>18</b><span>Miércoles 🌙<br>de noviembre</span></div>
+      <div class="dia" data-dia="Domingo 22 de noviembre"><b>22</b><span>Domingo ☀️<br>de noviembre</span></div>
+    </div>
+    <div id="bloqueHoras" class="oculto">
+      <h2>¿A qué horita? ⏰</h2>
+      <p class="small">Todas estas horas están libres para ti (las demás también, pero shhh 🤫)</p>
+      <div class="horas" id="horas"></div>
+    </div>
+    <button class="btn" id="b1" disabled>¡Acepto la misión! 💞</button>
+  </div>
+</section>
+
+<!-- ============ 2. ACTIVIDADES ============ -->
+<section class="screen" id="s2">
+  <div class="pasos"><span></span><span class="on"></span><span></span><span></span><span></span></div>
+  <div class="card">
+    <h1>¿Qué hacemos? 🎀</h1>
+    <img class="foto cuadro gato" alt="gatito chistoso">
+    <span class="pie">Nivel de emoción de este gato: 1000% 😼</span>
+    <p>Los kilómetros no pueden contra nosotros 🌍💞 Elige todo lo que quieras hacer en nuestra llamada (puedes elegir varias, eh):</p>
+    <div class="acts" id="acts"></div>
+    <button class="btn" id="b2" disabled>Listo, ya elegí 😍</button>
+  </div>
+</section>
+
+<!-- ============ 3. ¿ME AMAS? ============ -->
+<section class="screen" id="s3">
+  <div class="pregunta">
+    <div class="pasos"><span></span><span></span><span class="on"></span><span></span><span></span></div>
+    <img class="foto gato" alt="gatito esperando respuesta">
+    <h1>¿Me amas? 🥺</h1>
+    <div class="botones"><button class="si" data-next="s4" data-q="meAmas">Sí 💖</button><button class="no">No</button></div>
+    <div class="burla"></div>
+  </div>
+</section>
+
+<!-- ============ 4. ¿POLOLA? ============ -->
+<section class="screen" id="s4">
+  <div class="pregunta">
+    <div class="pasos"><span></span><span></span><span></span><span class="on"></span><span></span></div>
+    <img class="foto gato" alt="gatito con cara de enamorado">
+    <h1 style="font-size:36px">¿Quieres ser mi polola para toda la vida? 💍</h1>
+    <div class="botones"><button class="si" data-next="s5" data-q="polola">Sí 💍</button><button class="no">No</button></div>
+    <div class="burla"></div>
+  </div>
+</section>
+
+<!-- ============ 5. COMIDA ============ -->
+<section class="screen" id="s5">
+  <div class="pasos"><span></span><span></span><span></span><span></span><span class="on"></span></div>
+  <div class="card">
+    <h1>Última pregunta 🍽️</h1>
+    <img class="foto cuadro gato" alt="gatito con hambre">
+    <span class="pie">Este gato también tiene hambre, no lo juzgues 😹</span>
+    <p>¿Qué quieres comer ese día? (yo pido lo mismo y comemos juntitos por videollamada 🥰)</p>
+    <div class="comidas" id="comidas"></div>
+    <button class="btn" id="b5" disabled>Enviar mis respuestas 💌</button>
+  </div>
+</section>
+
+<!-- ============ 6. CARGA ============ -->
+<section class="screen" id="s6">
+  <div class="carga">
+    <div class="corazonGrande">💖</div>
+    <h2 id="msgCarga">Enviando tus respuestas a Cupido...</h2>
+    <div class="barra"><div id="barra"></div></div>
+    <p class="small">No cierres la página, el gatito mensajero va corriendo 🐾</p>
+  </div>
+</section>
+
+<!-- ============ 7. FINAL ============ -->
+<section class="screen" id="s7">
+  <div class="card">
+    <h1>¡Cita confirmada! 🎉</h1>
+    <img class="foto gato" alt="gatito feliz">
+    <p id="msgFinal">Tus respuestas ya llegaron a mi corazón (y a mi correo) 💌</p>
+    <div class="resumen" id="resumen"></div>
+    <p style="margin-top:14px">Te amo muchísimo, nos vemos pronto 💜<br><span class="small">PD: el botón de "No" sigue corriendo, nunca lo vas a alcanzar 😂</span></p>
+  </div>
+</section>
+
+<script>
+"use strict";
+/* ====== Configuración ====== */
+const CORREO = "perezjuan3014@gmail.com";
+const respuestas = {fecha:"", hora:"", actividades:[], meAmas:"", polola:"", comida:"", intentosNo:{meAmas:0, polola:0}};
+
+/* ====== Corazones flotando ====== */
+const emojis = ["💖","💜","💗","💕","💞","🩷","💘","🌸","✨","🎀"];
+function corazon(){
+  const h = document.createElement("div");
+  h.className = "fh";
+  h.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+  h.style.left = Math.random()*100 + "vw";
+  h.style.fontSize = (16 + Math.random()*26) + "px";
+  h.style.animationDuration = (6 + Math.random()*6) + "s";
+  document.getElementById("hearts").appendChild(h);
+  setTimeout(() => h.remove(), 13000);
+}
+setInterval(corazon, 450);
+for(let i=0;i<10;i++) setTimeout(corazon, i*120);
+
+/* ====== Gatitos random (con plan B si no cargan) ====== */
+const planB = ["🐱","🐶","🐰","🐻","🐼","🐹","🦦","🐥"];
+function svgEmoji(e){
+  return "data:image/svg+xml," + encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='#ffe3f0'/><text x='50' y='68' font-size='58' text-anchor='middle'>${e}</text><text x='80' y='28' font-size='20'>💖</text></svg>`);
+}
+function cargarGatos(sec){
+  sec.querySelectorAll("img.gato").forEach((img, i) => {
+    if(img.dataset.ok) return;
+    img.dataset.ok = 1;
+    img.onerror = () => { img.onerror = null; img.src = svgEmoji(planB[Math.floor(Math.random()*planB.length)]); };
+    const gif = Math.random() < 0.4 ? "/gif" : "";
+    img.src = `https://cataas.com/cat${gif}?width=400&r=${Date.now()}${i}${Math.random().toString(36).slice(2,6)}`;
+  });
+}
+
+/* ====== Navegación ====== */
+function ir(id){
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("on"));
+  const s = document.getElementById(id);
+  s.classList.add("on");
+  cargarGatos(s);
+  window.scrollTo({top:0, behavior:"smooth"});
+  s.querySelectorAll(".no").forEach(n => { n.classList.remove("huyendo"); n.style.left = n.style.top = ""; });
+}
+cargarGatos(document.getElementById("s1"));
+
+/* ====== Pantalla 1: día y hora ====== */
+const iconos = ["☕","🥐","🌞","🌼","🍓","🌷","🍝","🧋","🌈","🍰","🌅","🌇","🌙","⭐","🌌","💫","🌛"];
+const horasDiv = document.getElementById("horas");
+for(let h=8; h<=24; h++){
+  const h12 = h===24 ? 12 : (h>12 ? h-12 : h);
+  const ampm = h===24 ? "AM" : (h>=12 ? "PM" : "AM");
+  const txt = `${h12}:00 ${ampm}`;
+  const momento = h<12 ? "mañanita" : h<18 ? "tardecita" : h<24 ? "nochecita" : "medianoche";
+  const d = document.createElement("div");
+  d.className = "hora";
+  d.innerHTML = `<i>${iconos[h-8]}</i>${txt}<small>${momento}</small>`;
+  d.onclick = () => {
+    horasDiv.querySelectorAll(".hora").forEach(x => x.classList.remove("sel"));
+    d.classList.add("sel"); respuestas.hora = txt + (h===24 ? " (medianoche)" : ""); chequear1();
+    for(let i=0;i<5;i++) setTimeout(corazon, i*60);
+  };
+  horasDiv.appendChild(d);
+}
+document.querySelectorAll(".dia").forEach(d => d.onclick = () => {
+  document.querySelectorAll(".dia").forEach(x => x.classList.remove("sel"));
+  d.classList.add("sel"); respuestas.fecha = d.dataset.dia;
+  document.getElementById("bloqueHoras").classList.remove("oculto");
+  chequear1();
+});
+function chequear1(){ document.getElementById("b1").disabled = !(respuestas.fecha && respuestas.hora); }
+document.getElementById("b1").onclick = () => ir("s2");
+
+/* ====== Pantalla 2: actividades ====== */
+const actividades = [
+  ["🎮","Jugar Roblox","y te gano (o me dejo ganar 🙈)", true],
+  ["🍿","Ver una peli juntos","dándole play al mismo tiempo"],
+  ["🍳","Cocinar lo mismo","cada quien en su cocina"],
+  ["🎤","Karaoke","desafinando con amor"],
+  ["🎨","Dibujar juntos","Gartic Phone o adivina el dibujo"],
+  ["❓","Preguntas de pareja","36 preguntas para enamorarse más"],
+  ["🎧","Escuchar música","nuestra playlist juntitos"],
+  ["📺","Maratón de serie","capítulo y capítulo"],
+  ["🕹️","Jugar Among Us","yo soy el impostor de tu corazón"],
+  ["🌙","Dormirnos en llamada","el clásico de los clásicos"],
+  ["🔮","Leer horóscopos","y decir que somos compatibles"],
+  ["🗺️","Planear cuando nos veamos","lo que haremos en persona"]
+];
+const actsDiv = document.getElementById("acts");
+actividades.forEach(([ic, nom, sub, estrella]) => {
+  const d = document.createElement("div");
+  d.className = "act" + (estrella ? " estrella" : "");
+  d.innerHTML = `<i>${ic}</i>${nom}<small>${sub}</small>`;
+  d.onclick = () => {
+    d.classList.toggle("sel");
+    const i = respuestas.actividades.indexOf(nom);
+    i >= 0 ? respuestas.actividades.splice(i,1) : respuestas.actividades.push(nom);
+    document.getElementById("b2").disabled = respuestas.actividades.length === 0;
+  };
+  actsDiv.appendChild(d);
+});
+document.getElementById("b2").onclick = () => ir("s3");
+
+/* ====== Pantallas 3 y 4: Sí / No que se escapa ====== */
+const burlas = [
+  "Uy, se te resbaló el dedo 🙈","Ese botón está roto, prueba el otro 😌","¿Segura? Yo no creo 🤨",
+  "El botón 'No' se fue a buscar a alguien que le crea 🏃‍♂️","Error 404: 'No' no encontrado 💻",
+  "El gatito está llorando 😿","Cada vez que lo intentas, el 'Sí' crece 👀","Ya ríndete, mi amor 😂",
+  "Ni lo intentes, el 'No' es más rápido que tú 🐇","Pista: el botón rosado 💖"
+];
+document.querySelectorAll(".pregunta").forEach(p => {
+  const no = p.querySelector(".no"), si = p.querySelector(".si"), burla = p.querySelector(".burla");
+  const q = si.dataset.q;
+  let escala = 1;
+  let ultimo = 0;
+  const huir = e => {
+    if(e){ e.preventDefault(); e.stopPropagation(); }
+    if(Date.now() - ultimo < 350) return;
+    ultimo = Date.now();
+    respuestas.intentosNo[q]++;
+    no.classList.add("huyendo");
+    const w = no.offsetWidth, h = no.offsetHeight, m = 12;
+    let x, y, intentos = 0;
+    const r = si.getBoundingClientRect();
+    do{
+      x = m + Math.random() * (window.innerWidth - w - 2*m);
+      y = m + Math.random() * (window.innerHeight - h - 2*m);
+      intentos++;
+    } while(intentos < 20 && x < r.right + 10 && x + w > r.left - 10 && y < r.bottom + 10 && y + h > r.top - 10);
+    no.style.left = x + "px"; no.style.top = y + "px";
+    burla.textContent = burlas[(respuestas.intentosNo[q] - 1) % burlas.length];
+    escala = Math.min(escala + 0.12, 1.9);
+    si.style.scale = escala;
+    corazon();
+  };
+  no.addEventListener("pointerdown", huir);
+  no.addEventListener("click", huir);
+  no.addEventListener("mouseenter", () => { if(matchMedia("(hover:hover)").matches) huir(); });
+  si.onclick = () => {
+    respuestas[q] = q === "polola" ? "¡Sí, para toda la vida! 💍" : "¡Sí! 💖";
+    confeti();
+    setTimeout(() => ir(si.dataset.next), 700);
+  };
+});
+function confeti(){
+  for(let i=0;i<35;i++){
+    const c = document.createElement("div");
+    c.className = "confeti";
+    c.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    c.style.left = Math.random()*100 + "vw";
+    c.style.animationDuration = (1.8 + Math.random()*2) + "s";
+    c.style.animationDelay = Math.random()*0.4 + "s";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 4500);
+  }
+}
+
+/* ====== Pantalla 5: comida ====== */
+const comidas = [["🍔","Hamburguesa","con extra queso"],["🍕","Pizza","de la que tú quieras"],["🍟","Salchipapa","con todas las salsas"],["🍗","Arroz con pollo","el clásico que nunca falla"]];
+const comDiv = document.getElementById("comidas");
+comidas.forEach(([ic, nom, sub]) => {
+  const d = document.createElement("div");
+  d.className = "comida";
+  d.innerHTML = `<i>${ic}</i>${nom}<small>${sub}</small>`;
+  d.onclick = () => {
+    comDiv.querySelectorAll(".comida").forEach(x => x.classList.remove("sel"));
+    d.classList.add("sel"); respuestas.comida = nom;
+    document.getElementById("b5").disabled = false;
+  };
+  comDiv.appendChild(d);
+});
+document.getElementById("b5").onclick = enviar;
+
+/* ====== Envío ====== */
+function resumenTexto(){
+  return [
+    `📅 Día: ${respuestas.fecha}`,
+    `⏰ Hora: ${respuestas.hora}`,
+    `🎮 Actividades: ${respuestas.actividades.join(", ")}`,
+    `💖 ¿Me amas?: ${respuestas.meAmas} (intentó decir "No" ${respuestas.intentosNo.meAmas} veces 😂)`,
+    `💍 ¿Polola para toda la vida?: ${respuestas.polola} (intentó decir "No" ${respuestas.intentosNo.polola} veces 😂)`,
+    `🍽️ Comida: ${respuestas.comida}`
+  ];
+}
+async function enviar(){
+  ir("s6");
+  const msgs = ["Enviando tus respuestas a Cupido... 💘","Empacando besitos virtuales 😘","Avisándole al gatito mensajero 🐱","Calentando la salchipapa 🍟","Casi listo, mi amor 💜"];
+  let p = 0, k = 0;
+  const barra = document.getElementById("barra"), msg = document.getElementById("msgCarga");
+  const timer = setInterval(() => { p = Math.min(p + 7 + Math.random()*10, 92); barra.style.width = p + "%"; if(Math.random() < .45){ k = (k+1) % msgs.length; msg.textContent = msgs[k]; } }, 450);
+  const datos = {
+    _subject: "💌 ¡Respuestas de la cita! " + respuestas.fecha + " a las " + respuestas.hora,
+    _template: "table", _captcha: "false",
+    "Día": respuestas.fecha, "Hora": respuestas.hora,
+    "Actividades": respuestas.actividades.join(", "),
+    "¿Me amas?": respuestas.meAmas + ` (intentos de decir No: ${respuestas.intentosNo.meAmas})`,
+    "¿Polola para toda la vida?": respuestas.polola + ` (intentos de decir No: ${respuestas.intentosNo.polola})`,
+    "Comida": respuestas.comida,
+    "Enviado": new Date().toLocaleString("es-CO")
+  };
+  let ok = false;
+  const espera = new Promise(r => setTimeout(r, 4200));
+  try{
+    const r = await fetch("https://formsubmit.co/ajax/" + CORREO, {
+      method:"POST", headers:{"Content-Type":"application/json","Accept":"application/json"}, body:JSON.stringify(datos)
+    });
+    const j = await r.json().catch(() => ({}));
+    ok = r.ok && String(j.success) !== "false";
+  }catch(e){ ok = false; }
+  await espera;
+  clearInterval(timer); barra.style.width = "100%";
+  setTimeout(() => {
+    const lineas = resumenTexto();
+    document.getElementById("resumen").innerHTML = lineas.map(l => `<div>${l.replace(/^(\S+ [^:]+:)/, "<b>$1</b>")}</div>`).join("");
+    if(!ok){
+      document.getElementById("msgFinal").innerHTML = `Cupido se enredó con el wifi 🙈 pero no pasa nada: <a href="mailto:${CORREO}?subject=${encodeURIComponent("💌 Respuestas de la cita")}&body=${encodeURIComponent(lineas.join("\n"))}">toca aquí para enviármelo</a> o mándame captura de esta pantalla 💌`;
+    }
+    ir("s7"); confeti(); setTimeout(confeti, 900);
+  }, 500);
+}
+</script>
+</body>
+</html>
