@@ -405,8 +405,9 @@ async function enviar(){
   let ok = false;
   const espera = new Promise(r => setTimeout(r, 4200));
   try{
+    const ctl = new AbortController(); setTimeout(() => ctl.abort(), 15000);
     const r = await fetch("https://formsubmit.co/ajax/" + CORREO, {
-      method:"POST", headers:{"Content-Type":"application/json","Accept":"application/json"}, body:JSON.stringify(datos)
+      method:"POST", signal:ctl.signal, headers:{"Content-Type":"application/json","Accept":"application/json"}, body:JSON.stringify(datos)
     });
     const j = await r.json().catch(() => ({}));
     ok = r.ok && String(j.success) !== "false";
